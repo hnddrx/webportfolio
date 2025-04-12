@@ -212,7 +212,7 @@ export default function Home() {
         animate="visible"
       >
         <motion.h1 className={styles.heroTitle} variants={childVariants}>
-          Hey, I'm Wren Macayan
+          Hey, I&apos;m Wren Macayan
         </motion.h1>
         <motion.p className={styles.heroSubtitle} variants={childVariants}>
           Building smart solutions with <strong>Odoo</strong>, crafting dynamic apps with <strong>MERN</strong>, and engineering with <strong>Python</strong>.
