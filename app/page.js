@@ -234,7 +234,7 @@ export default function Home() {
         <h2 className={styles.sectionHeading}>About Me</h2>
         <div className={styles.glassCard}>
           <p className={`${isDark ? styles.text : styles.textlight}`}>
-            Hello, I'm Wren – a seasoned full-stack developer with expertise in PostgreSQL, Python, XML, Odoo, MongoDB, ReactJS, ExpressJS, and NodeJS. Let’s collaborate and turn your innovative ideas into cutting-edge solutions!
+            Hello, I&apos;m Wren – a seasoned full-stack developer with expertise in PostgreSQL, Python, XML, Odoo, MongoDB, ReactJS, ExpressJS, and NodeJS. Let’s collaborate and turn your innovative ideas into cutting-edge solutions!
           </p>
         </div>
       </section>
