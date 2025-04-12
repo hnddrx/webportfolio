@@ -46,7 +46,7 @@ export default function Navbar() {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  }, [theme]);
 
   // Toggle theme + change body color
   const handleToggleTheme = () => {
