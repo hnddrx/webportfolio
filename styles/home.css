@@ -1,0 +1,94 @@
+/* Home.css */
+
+/* Hero Section */
+.hero {
+    padding: 5rem 2rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #282c34; /* Add a background color to make the text pop */
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+  }
+  
+  .hero-description {
+    font-size: 1.5rem;
+    color: #aaa; /* Lighter color for description */
+    text-align: center;
+  }
+  
+  /* Section Styles */
+  section {
+    padding: 4rem 2rem;
+    color: white;
+    background-color: #333; /* Dark background for sections */
+    margin-bottom: 2rem;
+    border-radius: 10px; /* Slight rounded corners for sections */
+  }
+  
+  /* Section Title */
+  .section-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #ff7f50; /* Accent color */
+  }
+  
+  /* Section Text */
+  .section-text {
+    font-size: 1.2rem;
+    color: #ccc; /* Slightly lighter text color */
+  }
+  
+  /* Projects List */
+  .project-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .project-item {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: #ff7f50; /* Accent color */
+    transition: transform 0.3s ease; /* Hover animation */
+  }
+  
+  .project-item:hover {
+    transform: scale(1.1); /* Slight scale effect on hover */
+    color: white; /* Change text color on hover */
+  }
+  
+  /* Contact Section */
+  .section-contact {
+    background-color: #444; /* Darker background for contact section */
+    color: #ddd; /* Slightly lighter text for the contact section */
+    padding: 3rem 2rem;
+    border-radius: 10px; /* Rounded corners */
+    text-align: center;
+  }
+  
+  /* Adjusting Responsiveness */
+  @media (max-width: 768px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+  
+    .hero-description {
+      font-size: 1.2rem;
+    }
+  
+    .section-title {
+      font-size: 1.5rem;
+    }
+  
+    .section-text {
+      font-size: 1rem;
+    }
+  }
+  

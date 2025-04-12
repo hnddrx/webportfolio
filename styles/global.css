@@ -1,0 +1,12 @@
+body.dark {
+    background-color: #1e1e1e;
+    color: white;
+  }
+  
+body.light {
+    background-color: #ffffff;
+    color: black;
+  }
+  
+  /* Additional global styles */
+  

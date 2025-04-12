@@ -1,0 +1,366 @@
+/* ----------------------------------- */
+/* Base Page Styles */
+/* ----------------------------------- */
+
+.page {
+  font-family: 'Poppins', sans-serif;
+  line-height: 1.6;
+  padding-bottom: 4rem;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Theme Modes */
+.dark {
+  background-color: #0a0a0a;
+  color: #f1f1f1;
+}
+
+.light {
+  background-color: #ffffff;
+  color: #111111;
+}
+
+/* ----------------------------------- */
+/* Hero Section */
+/* ----------------------------------- */
+
+.hero {
+  padding: 8rem 2rem;
+  text-align: center;
+  background: radial-gradient(circle at top left, #121212, #0d0d0d);
+}
+
+.light .hero {
+  background: radial-gradient(circle at top left, #f0f0f0, #ffffff);
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(90deg, #00feba, #5b86e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  letter-spacing: -1px;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  color: #bbb;
+  margin-bottom: 2rem;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  text-align: center;
+  line-height: 1.6;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  letter-spacing: 0.2px;
+}
+
+
+
+.light .heroSubtitle {
+  color: #333;
+}
+
+.ctaButton {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background: #00feba;
+  color: #000;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(0, 254, 186, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0, 254, 186, 0.4);
+}
+
+/* ----------------------------------- */
+/* Section Layout */
+/* ----------------------------------- */
+
+.section {
+  padding: 4rem 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.sectionHeading {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  color: #333;
+}
+
+/* Text Helpers */
+.text {
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.textlight {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* Glass Card */
+.glassCard {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+/* ----------------------------------- */
+/* Skills Section */
+/* ----------------------------------- */
+
+.skillGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.skillCard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-size: 2rem;
+  flex-direction: column;
+  text-align: center;
+}
+
+.skillIcon {
+  font-size: 3.5rem;
+  margin-bottom: 0.5rem;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+.iconDark {
+  text-shadow: 0 0 10px white, 0 0 20px white, 0 0 30px white;
+}
+
+.skillIcon:hover {
+  transform: scale(1.2);
+}
+
+.skillTitle {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+/* ----------------------------------- */
+/* Projects Section */
+/* ----------------------------------- */
+
+.projectGrid {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.projectCard {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.projectCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dark .projectCard {
+  background: #1a1a1a;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.light .projectCard {
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.iconButton {
+  min-width: 36px;
+  padding: 6px;
+}
+
+.toolsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.projectTool {
+  background-color: #e0e0e0;
+  color: #333;
+  font-size: 0.8rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 5px;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+/* ----------------------------------- */
+/* Contact Section */
+/* ----------------------------------- */
+
+.contactSection {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+}
+
+.contactContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.contactLinks,
+.contactForm {
+  flex: 1;
+  max-width: 500px;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.contactIcon {
+  margin-right: 0.5rem;
+  color: #0073e6;
+}
+
+.contactItem a {
+  text-decoration: none;
+  color: #0073e6;
+  transition: color 0.3s ease;
+}
+
+.contactItem a:hover {
+  color: #005bb5;
+}
+
+.inputGroup {
+  margin-bottom: 1.5rem;
+}
+
+.inputGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.inputGroup input,
+.inputGroup textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.inputGroup input:focus,
+.inputGroup textarea:focus {
+  border-color: #0073e6;
+}
+
+.submitButton {
+  background-color: #0073e6;
+  color: #fff;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #005bb5;
+}
+
+/* ----------------------------------- */
+/* Footer */
+/* ----------------------------------- */
+
+.footer {
+  text-align: center;
+  padding: 3rem 2rem;
+  transition: background 0.3s ease, color 0.3s ease;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.footerContent p {
+  font-size: 1.1rem;
+  margin: 0;
+  color: inherit;
+}
+
+.socialIcons {
+  margin-top: 1rem;
+}
+
+.socialIcons a {
+  margin: 0 0.5rem;
+  text-decoration: none;
+  font-size: 1rem;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.footerLight {
+  background: #f0f0f0;
+  color: #444;
+}
+
+.footerLight .socialIcons a:hover {
+  color: #0077b6;
+}
+
+.footerDark {
+  background: #111;
+  color: gray;
+}
+
+.footerDark .socialIcons a:hover {
+  color: #f39c12;
+}

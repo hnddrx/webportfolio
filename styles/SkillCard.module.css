@@ -1,0 +1,22 @@
+.card {
+    background-color: #f1f1f1;
+    border-radius: 12px;
+    padding: 20px;
+    color: #333;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 150px; /* Adjust width */
+    text-align: center;
+  }
+  
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+  
+  .card:hover {
+    background-color: #0d74ff;
+    color: white;
+    cursor: pointer;
+  }
+  
