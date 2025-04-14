@@ -203,6 +203,7 @@ export default function Home() {
     
    /*  <body style={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}> */
     <main className={`${styles.page} ${isDark ? styles.dark : styles.light}`}>
+
       {/* HERO SECTION */}
       <motion.section
         id="hero"
@@ -300,20 +301,34 @@ export default function Home() {
                 )}
 
                 <Box
-                  className={styles.toolsWrapper}
                   sx={{
                     display: 'flex',
                     flexWrap: 'wrap',
                     gap: 1,
-                    marginTop: { xs: 1, sm: 0 },
+                    mt: { xs: 1, sm: 0 },
                   }}
                 >
-                  {project.tools?.map((tool, j) => (
-                    <span key={j} className={styles.projectTool}>
-                      {tool}
-                    </span>
+                  {project.tools?.map((tool, index) => (
+                    <Box
+                    key={index}
+                    sx={{
+                      px: 1.5,
+                      py: 0.5,
+                      borderRadius: '20px',
+                      backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
+                      fontSize: '0.75rem',
+                      fontWeight: 500,
+                      color: isDark ? '#e0e0e0' : '#333',
+                      lineHeight: 1.5,
+                      letterSpacing: 0.3,
+                    }}
+                  >
+                    {tool}
+                  </Box>
+                  
                   ))}
                 </Box>
+
               </Box>
 
             </div>
@@ -323,7 +338,7 @@ export default function Home() {
 
       {/* CONTACT */}
       <Section id="contact" data-aos="fade-up" sx={{ backgroundColor: isDark ? '#0a0a0a' : '#ffffff' }}>
-        <SectionHeading variant="h4" sx={{ color: isDark ? '#f9f9f9' : '#0a0a0a' }}>
+        <SectionHeading variant="h4" className={styles.sectionHeading}>
           Contact
         </SectionHeading>
         <ContactContainer >
