@@ -52,7 +52,7 @@ const projects = [
     "title": "Route Planner",
     "description": "Route Planner with Live Traffic Insight. Plan smarter journeys with the Route Planner App, an interactive mapping tool designed to help you find optimal travel routes in the Philippines. Powered by OpenRouteService and HERE Traffic API, this app allows users to:",
     "url": "https://eta-tracker-iota.vercel.app/",
-    "tools": ["Python", "Odoo", "PostgreSQL", "XML", "JavaScript"],
+    "tools": ["React", "CSS", "OpenRouteService", "HERE Traffic API"],
     "repo": "https://github.com/hnddrx/router_planner"
   }
   
