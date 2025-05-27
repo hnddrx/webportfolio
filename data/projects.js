@@ -54,7 +54,16 @@ const projects = [
     "url": "https://eta-tracker-iota.vercel.app/",
     "tools": ["React", "CSS", "OpenRouteService", "HERE Traffic API"],
     "repo": "https://github.com/hnddrx/router_planner"
+  }, 
+  {
+    "icon": "🗺️",
+    "title": "QuakeAlert",
+    "description": "QuakeAlert is your real-time earthquake information companion, designed to keep you informed about seismic activity near your location. Whether you're at home, work, or on the go, QuakeAlert provides up-to-date alerts and detailed information on the latest earthquake events in your vicinity.\n\nKey features include:\n\n- **Live Earthquake Data**: Get notified of recent earthquakes in real-time based on your current location.\n- **Interactive Map**: Explore a map showing the epicenter and magnitude of each earthquake, helping you stay aware of nearby seismic events.\n- **Magnitude & Impact**: View detailed earthquake data such as magnitude, location, and time of occurrence, along with interactive popups for more in-depth information.\n- **Custom Alerts**: Set your preferences to receive alerts about earthquakes of a specific magnitude or distance from your location.\n- **User-Friendly Interface**: A simple, easy-to-navigate interface designed for quick access to critical information during emergencies.\n\nWith **QuakeAlert**, you can stay one step ahead and always be prepared for seismic events that might affect you.",
+    "url": "https://quakeapp-rho.vercel.app/",
+    "tools": ["React", "CSS", "USGS API"],
+    "repo": "https://github.com/hnddrx/quakeapp"
   }
+
   
 ];
 
