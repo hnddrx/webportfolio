@@ -1,6 +1,6 @@
 'use client';
-import emailjs from '@emailjs/browser';
 
+import emailjs from '@emailjs/browser';
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import AOS from 'aos';
@@ -12,13 +12,12 @@ import skills from '../data/skills';
 
 import styles from '../styles/Home.module.css';
 import '../styles/global.css';
+
 import LaunchIcon from '@mui/icons-material/Launch';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import Tooltip from '@mui/material/Tooltip';
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
-
-import { Folder, ExternalLink } from 'lucide-react';
 
 import {
   FaLinkedin,
@@ -28,7 +27,6 @@ import {
 } from 'react-icons/fa';
 
 import {
-  Grid,
   Box,
   Typography,
   TextField,
@@ -43,23 +41,15 @@ const containerVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.3,
-    },
+    transition: { staggerChildren: 0.2, delayChildren: 0.3 },
   },
 };
 
 const childVariants = {
   hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { type: 'spring', stiffness: 80 },
-  },
+  visible: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 80 } },
 };
 
-// Styled Components
 const Section = styled('section')(({ theme }) => ({
   padding: '4rem 2rem',
   backgroundColor: '#f9f9f9',
@@ -112,64 +102,129 @@ const ContactItem = styled('div')({
   },
 });
 
-const Input = styled(TextField)(({
+const Input = styled(TextField)({
   marginBottom: '1.5rem',
   borderRadius: '8px',
-  
   '& .MuiOutlinedInput-root': {
-    '& fieldset': {
-      borderColor: '#ddd',
-    },
-    '&:hover fieldset': {
-      borderColor: '#0073e6',
-    },
-    '& label': {
-      color: '#ffffff',
-    },
-    '& placeholder': {
-      color: '#ffffff',
-    },
+    '& fieldset': { borderColor: '#ddd' },
+    '&:hover fieldset': { borderColor: '#0073e6' },
+    '& label': { color: '#ffffff' },
+    '& placeholder': { color: '#ffffff' },
   },
-}));
+});
 
-const SubmitButton = styled(Button)(({
+const SubmitButton = styled(Button)({
   backgroundColor: '#0073e6',
   marginTop: '1rem',
   color: '#fff',
   padding: '0.8rem 1.5rem',
   borderRadius: '8px',
   width: '100%',
-  '&:hover': {
-    backgroundColor: '#005bb5',
-  },
-}));
+  '&:hover': { backgroundColor: '#005bb5' },
+});
+
+// Alert wrapper
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
+// Contact Info Component
+function ContactInfo({ isDark }) {
+  return (
+    <CardBox sx={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}>
+      <Typography variant="h6" gutterBottom fontWeight={600}>
+        Reach out to me:
+      </Typography>
+      <ContactItem>
+        <Link href="mailto:wren@hris.com">
+          <FaEnvelope style={{ marginRight: '8px' }} />
+          macayanwren@gmail.com
+        </Link>
+      </ContactItem>
+      <ContactItem>
+        <Link href="tel:+1234567890">
+          <FaPhoneAlt style={{ marginRight: '8px' }} />
+          +63 906 006 3929
+        </Link>
+      </ContactItem>
+      <ContactItem>
+        <Link href="https://www.linkedin.com/in/wrenmcyn/" target="_blank" rel="noopener noreferrer">
+          <FaLinkedin style={{ marginRight: '8px' }} />
+          LinkedIn
+        </Link>
+      </ContactItem>
+      <ContactItem>
+        <Link href="https://github.com/hnddrx" target="_blank" rel="noopener noreferrer">
+          <FaGithub style={{ marginRight: '8px' }} />
+          GitHub
+        </Link>
+      </ContactItem>
+    </CardBox>
+  );
+}
+
+// Contact Form Component
+function ContactForm({ formData, handleChange, handleSubmit, isDark }) {
+  return (
+    <CardBox sx={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}>
+      <Typography variant="h6" gutterBottom fontWeight={600}>
+        Get In Touch:
+      </Typography>
+      <form onSubmit={handleSubmit}>
+        <Input
+          label="Name"
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          fullWidth
+          required
+          variant="outlined"
+        />
+        <Input
+          label="Email"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          fullWidth
+          required
+          variant="outlined"
+        />
+        <Input
+          label="Message"
+          multiline
+          rows={4}
+          name="message"
+          value={formData.message}
+          onChange={handleChange}
+          fullWidth
+          required
+          variant="outlined"
+        />
+        <SubmitButton type="submit">Send Message</SubmitButton>
+      </form>
+    </CardBox>
+  );
+}
 
 export default function Home() {
   const { theme } = useTheme();
   const isDark = theme === 'dark';
 
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-
-  const Alert = React.forwardRef(function Alert(props, ref) {
-    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  });
-
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' });
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarSeverity, setSnackbarSeverity] = useState('success');
   const [snackbarMessage, setSnackbarMessage] = useState('');
+
+  useEffect(() => {
+    AOS.init({ duration: 1000 });
+  }, []);
 
   const handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') return;
     setSnackbarOpen(false);
   };
-  
-  useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -178,32 +233,30 @@ export default function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    emailjs.send(
-      'service_p9rwddi', // Replace with your actual EmailJS Service ID
-      'template_3g1xdci', // Replace with your EmailJS Template ID
-      formData,
-      'er57-VUb-cWBsMCcf' // Replace with your EmailJS Public Key
-    )
-    .then((result) => {
-      setSnackbarSeverity('success');
-      setSnackbarMessage('Message sent successfully!');
-      setSnackbarOpen(true);
-      setFormData({ name: '', email: '', message: '' });
-    })
-    .catch((error) => {
-      setSnackbarSeverity('error');
-      setSnackbarMessage('Something went wrong. Please try again later.');
-      setSnackbarOpen(true);
-      console.error('EmailJS Error:', error);
-    });
+
+    emailjs
+      .send(
+        'service_p9rwddi', // Your EmailJS Service ID
+        'template_3g1xdci', // Your EmailJS Template ID
+        formData,
+        'er57-VUb-cWBsMCcf' // Your EmailJS Public Key
+      )
+      .then(() => {
+        setSnackbarSeverity('success');
+        setSnackbarMessage('Message sent successfully!');
+        setSnackbarOpen(true);
+        setFormData({ name: '', email: '', message: '' });
+      })
+      .catch((error) => {
+        setSnackbarSeverity('error');
+        setSnackbarMessage('Something went wrong. Please try again later.');
+        setSnackbarOpen(true);
+        console.error('EmailJS Error:', error);
+      });
   };
 
   return (
-    
-   /*  <body style={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}> */
     <main className={`${styles.page} ${isDark ? styles.dark : styles.light}`}>
-
       {/* HERO SECTION */}
       <motion.section
         id="hero"
@@ -216,9 +269,9 @@ export default function Home() {
           Hey, I&apos;m Wren Macayan
         </motion.h1>
         <motion.p className={styles.heroSubtitle} variants={childVariants}>
-          Building smart solutions with <strong>Odoo</strong>, crafting dynamic apps with <strong>MERN</strong>, and engineering with <strong>Python</strong>.
+          Building smart solutions with <strong>Odoo</strong>, crafting dynamic apps with{' '}
+          <strong>MERN</strong>, and engineering with <strong>Python</strong>.
         </motion.p>
-
         <motion.a
           href="#contact"
           className={styles.ctaButton}
@@ -235,7 +288,9 @@ export default function Home() {
         <h2 className={styles.sectionHeading}>About Me</h2>
         <div className={styles.glassCard}>
           <p className={`${isDark ? styles.text : styles.textlight}`}>
-            Hello, I&apos;m Wren – a seasoned full-stack developer with expertise in PostgreSQL, Python, XML, Odoo, MongoDB, ReactJS, ExpressJS, and NodeJS. Let’s collaborate and turn your innovative ideas into cutting-edge solutions!
+            Hello, I&apos;m Wren – a seasoned full-stack developer with expertise in PostgreSQL, Python,
+            XML, Odoo, MongoDB, ReactJS, ExpressJS, and NodeJS. Let’s collaborate and turn your innovative
+            ideas into cutting-edge solutions!
           </p>
         </div>
       </section>
@@ -245,19 +300,24 @@ export default function Home() {
         <h2 className={styles.sectionHeading}>Skills</h2>
         <div className={styles.skillGrid}>
           {skills.map((skill, i) => (
-            <div key={i} className={styles.skillCard}>
-              <span className={`${styles.skillIcon} ${isDark ? styles.iconDark : ''}`}>{skill.icon}</span>
-            </div>
+            <Tooltip key={i} title={skill.title} arrow>
+              <div className={styles.skillCard}>
+                <span className={`${styles.skillIcon} ${isDark ? styles.iconDark : ''}`}>{skill.icon}</span>
+              </div>
+            </Tooltip>
           ))}
         </div>
       </section>
+
       {/* PROJECTS */}
       <section id="projects" className={styles.section} data-aos="fade-up">
         <h2 className={styles.sectionHeading}>Projects</h2>
         <div className={styles.projectGrid}>
           {projects.map((project, i) => (
             <div key={i} className={styles.projectCard}>
-              <h3>{project.icon} {project.title}</h3>
+              <h3>
+                {project.icon} {project.title}
+              </h3>
               <p className={`${isDark ? styles.text : styles.textlight}`}>{project.description}</p>
 
               <Box
@@ -300,37 +360,39 @@ export default function Home() {
                   </Tooltip>
                 )}
 
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: 1,
-                    mt: { xs: 1, sm: 0 },
-                  }}
-                >
-                  {project.tools?.map((tool, index) => (
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: 1,
+                  mt: { xs: 1, sm: 0 },
+                }}
+              >
+                {project.tools?.map((tool, index) => (
+                  <Tooltip key={index} title={tool} arrow>
                     <Box
-                    key={index}
-                    sx={{
-                      px: 1.5,
-                      py: 0.5,
-                      borderRadius: '20px',
-                      backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
-                      fontSize: '0.75rem',
-                      fontWeight: 500,
-                      color: isDark ? '#e0e0e0' : '#333',
-                      lineHeight: 1.5,
-                      letterSpacing: 0.3,
-                    }}
-                  >
-                    {tool}
-                  </Box>
-                  
-                  ))}
-                </Box>
-
+                      component="span"
+                      sx={{
+                        px: 1.5,
+                        py: 0.5,
+                        borderRadius: '20px',
+                        backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
+                        fontSize: '0.75rem',
+                        fontWeight: 500,
+                        color: isDark ? '#e0e0e0' : '#333',
+                        lineHeight: 1.5,
+                        letterSpacing: 0.3,
+                        cursor: 'pointer',  // Use pointer to check hover area
+                        display: 'inline-block',  // Important for tooltip child
+                      }}
+                    >
+                      {tool}
+                    </Box>
+                  </Tooltip>
+                ))}
               </Box>
 
+              </Box>
             </div>
           ))}
         </div>
@@ -341,77 +403,9 @@ export default function Home() {
         <SectionHeading variant="h4" className={styles.sectionHeading}>
           Contact
         </SectionHeading>
-        <ContactContainer >
-          {/* Contact Links */}
-          <CardBox sx={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}>
-            <Typography variant="h6" gutterBottom fontWeight={600}>
-              Reach out to me:
-            </Typography>
-            <ContactItem>
-              <Link href="mailto:wren@hris.com">
-                <FaEnvelope style={{ marginRight: '8px' }} />
-                macayanwren@gmail.com
-              </Link>
-            </ContactItem>
-            <ContactItem>
-              <Link href="tel:+1234567890">
-                <FaPhoneAlt style={{ marginRight: '8px' }} />
-                +63 906 006 3929
-              </Link>
-            </ContactItem>
-            <ContactItem>
-              <Link href="https://www.linkedin.com/in/wrenmcyn/" target="_blank">
-                <FaLinkedin style={{ marginRight: '8px' }} />
-                LinkedIn
-              </Link>
-            </ContactItem>
-            <ContactItem>
-              <Link href="https://github.com/hnddrx" target="_blank">
-                <FaGithub style={{ marginRight: '8px' }} />
-                GitHub
-              </Link>
-            </ContactItem>
-          </CardBox>
-          {/* Form */}
-          <CardBox sx={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}>
-            <Typography variant="h6" gutterBottom fontWeight={600}>
-              Get In Touch:
-            </Typography>
-            <form onSubmit={handleSubmit}>
-              <Input
-                label="Name"
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                fullWidth
-                required
-                variant="outlined"
-              />
-              <Input
-                label="Email"
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                fullWidth
-                required
-                variant="outlined"
-              />
-              <Input
-                label="Message"
-                multiline
-                rows={4}
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                fullWidth
-                required
-                variant="outlined"
-              />
-              <SubmitButton type="submit">Send Message</SubmitButton>
-            </form>
-          </CardBox>
+        <ContactContainer>
+          <ContactInfo isDark={isDark} />
+          <ContactForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} isDark={isDark} />
         </ContactContainer>
       </Section>
 
@@ -427,6 +421,5 @@ export default function Home() {
         </Alert>
       </Snackbar>
     </main>
-    /* </body> */
   );
 }

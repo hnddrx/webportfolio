@@ -6,189 +6,122 @@ import {
   AppBar,
   Toolbar,
   IconButton,
-  Typography,
-  Button,
-  Drawer,
   Box,
+  Typography,
+  Tooltip,
+  useMediaQuery,
+  useTheme as useMuiTheme,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
 import Brightness7Icon from '@mui/icons-material/Brightness7';
+import HomeIcon from '@mui/icons-material/Home';
+import InfoIcon from '@mui/icons-material/Info';
+import WorkIcon from '@mui/icons-material/Work';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 
 const links = [
-  { label: 'Home', href: '#hero' },
-  { label: 'About', href: '#about' },
-  { label: 'Projects', href: '#projects' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '#hero', icon: <HomeIcon fontSize="small" /> },
+  { label: 'About', href: '#about', icon: <InfoIcon fontSize="small" /> },
+  { label: 'Projects', href: '#projects', icon: <WorkIcon fontSize="small" /> },
+  { label: 'Contact', href: '#contact', icon: <ContactMailIcon fontSize="small" /> },
 ];
 
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const isDark = theme === 'dark';
 
-  const [isMobile, setIsMobile] = useState(false);
-  const [isMounted, setIsMounted] = useState(false);
-  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const muiTheme = useMuiTheme();
+  const isSmallScreen = useMediaQuery(muiTheme.breakpoints.down('sm'));
 
-  // Set body background on first mount
   useEffect(() => {
-    setIsMounted(true);
+    setMounted(true);
 
-    const storedTheme = localStorage.getItem('theme') || theme;
-    const isDarkStored = storedTheme === 'dark';
-
-    document.body.style.backgroundColor = isDarkStored ? '#1e1e1e' : '#ffffff';
-
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const stored = localStorage.getItem('theme');
+    const storedTheme = stored || theme;
+    document.body.style.backgroundColor = storedTheme === 'dark' ? '#1e1e1e' : '#ffffff';
   }, [theme]);
 
-  // Toggle theme + change body color
-  const handleToggleTheme = () => {
+  const toggleTheme = () => {
     const newTheme = isDark ? 'light' : 'dark';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
     document.body.style.backgroundColor = newTheme === 'dark' ? '#1e1e1e' : '#ffffff';
   };
 
-  if (!isMounted) return null;
-
-  const drawer = (
-    <Box
-      sx={{
-        width: 250,
-        padding: 2,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 2,
-      }}
-    >
-      {links.map(({ label, href }) => (
-        <Button
-        key={label}
-        href={href}
-        sx={{
-          color: isDark ? '#e0e0e0' : '#333',
-          fontFamily: 'Inter, sans-serif',
-          fontWeight: 500,
-          fontSize: '0.95rem',
-          letterSpacing: '0.3px',
-          textTransform: 'none',
-          marginX: 1,
-          transition: 'color 0.2s ease-in-out',
-          '&:hover': {
-            color: isDark ? '#90caf9' : '#1976d2',
-          },
-        }}
-      >
-        {label}
-      </Button>
-      
-      ))}
-    </Box>
-  );
+  if (!mounted) return null;
 
   return (
-    <>
-      <AppBar
-        position="sticky"
+    <AppBar
+      position="fixed"
+      elevation={3}
+      sx={{
+        top: isSmallScreen ? 8 : 16,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        maxWidth: isSmallScreen ? '100%' : '480px',
+        width: 'calc(100% - 1.5rem)',
+        height: isSmallScreen ? '48px' : '64px',
+        borderRadius: isSmallScreen ? 0 : '10px',
+        backdropFilter: 'blur(10px)',
+        backgroundColor: isDark
+          ? 'rgba(20, 20, 20, 0.6)'
+          : 'rgba(255, 255, 255, 0.6)',
+        border: isDark ? '1px solid #333' : '1px solid #ccc',
+        zIndex: 1300,
+      }}
+    >
+      <Toolbar
         sx={{
-          backgroundColor: isDark ? '#1e1e1e' : '#ffffff',
-          color: isDark ? 'white' : 'black',
-          boxShadow: 'none',
-          borderBottom: isDark ? '1px solid #333' : '1px solid #e0e0e0',
+          minHeight: '48px',
+          px: 2,
+          justifyContent: 'space-between',
         }}
       >
-        <Toolbar
+        <Typography
+          variant="body1"
           sx={{
-            justifyContent: 'space-between',
-            px: { xs: 2, sm: 4 },
-            py: 1.5,
-            minHeight: '72px',
+            fontWeight: 600,
+            fontSize: '1rem',
+            letterSpacing: '-0.5px',
+            color: isDark ? '#fff' : '#111',
+            userSelect: 'none',
           }}
         >
-          <Typography
-            variant="h4"
-            component="div"
-            sx={{
-                
-              fontWeight: 800,
-              letterSpacing: '-0.75px',
-              fontSize: { xs: '1.5rem', sm: '1.75rem' },
-              color: isDark ? '#f5f5f5' : '#111111',
-              transition: 'color 0.3s ease-in-out',
-              userSelect: 'none',
-            }}
-          >
-            WREN<span style={{ color: isDark ? '#90caf9' : '#1976d2' }}>.</span>
-          </Typography>
+          WREN
+          <span style={{ color: isDark ? '#90caf9' : '#1976d2' }}>.</span>
+        </Typography>
 
-
-
-          <Box sx={{ display: 'flex', alignItems: 'center' }}>
-            {isMobile ? (
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+          {links.map(({ label, href, icon }) => (
+            <Tooltip title={label} placement="bottom" key={label}>
               <IconButton
-                edge="start"
-                color="inherit"
-                onClick={() => setDrawerOpen(true)}
-                aria-label="menu"
+                component="a"
+                href={href}
+                size="small"
+                sx={{
+                  opacity: 0.7,
+                  color: isDark ? '#e0e0e0' : '#333',
+                  '&:hover': {
+                    opacity: 1,
+                    color: isDark ? '#90caf9' : '#1976d2',
+                  },
+                }}
               >
-                <MenuIcon />
+                {icon}
               </IconButton>
+            </Tooltip>
+          ))}
+
+          <IconButton onClick={toggleTheme} sx={{ ml: 1 }} size="small">
+            {isDark ? (
+              <Brightness7Icon fontSize="small" />
             ) : (
-              links.map(({ label, href }) => (
-                <Button
-                  key={label}
-                  href={href}
-                  onClick={() => setDrawerOpen(false)}
-                  sx={{
-                    justifyContent: 'flex-start',
-                    fontFamily: 'Inter, sans-serif',
-                    fontWeight: 500,
-                    fontSize: '1rem',
-                    color: isDark ? '#e0e0e0' : '#333',
-                    textTransform: 'none',
-                    paddingY: 1,
-                    '&:hover': {
-                      color: isDark ? '#90caf9' : '#1976d2',
-                    },
-                  }}
-                >
-                  {label}
-                </Button>
-
-              ))
+              <Brightness4Icon fontSize="small" />
             )}
-
-            <IconButton
-              onClick={handleToggleTheme}
-              sx={{ ml: 1 }}
-              color="inherit"
-              aria-label="toggle theme"
-            >
-              {isDark ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-
-      <Drawer
-        anchor="right"
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        PaperProps={{
-          sx: {
-            backgroundColor: isDark ? '#222' : '#f7f7f7',
-          },
-        }}
-      >
-        {drawer}
-      </Drawer>
-    </>
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 }
