@@ -54,7 +54,16 @@ const projects = [
     "url": "https://eta-tracker-iota.vercel.app/",
     "tools": ["React", "CSS", "OpenRouteService", "HERE Traffic API"],
     "repo": "https://github.com/hnddrx/router_planner"
+  }, 
+  {
+    "icon": "🗺️",
+    "title": "QuakeAlert",
+    "description": "QuakeAlert keeps you informed with real-time earthquake data near your location. View recent seismic activity on an interactive map, explore details like magnitude and time, and set custom alerts for nearby quakes. Simple, fast, and built to keep you prepared.",
+    "url": "https://quakeapp-rho.vercel.app/",
+    "tools": ["React", "CSS", "USGS API"],
+    "repo": "https://github.com/hnddrx/quakeapp"
   }
+
   
 ];
 
