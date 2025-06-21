@@ -127,50 +127,95 @@ const SubmitButton = styled(Button)({
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-
 // Contact Info Component
 function ContactInfo({ isDark }) {
   return (
-    <CardBox sx={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}>
-      <Typography variant="h6" gutterBottom fontWeight={600}>
-        Reach out to me:
+    <CardBox
+      sx={{
+        backgroundColor: isDark ? '#121212' : '#fafafa',
+        color: isDark ? '#bbb' : '#444',
+  
+        padding: '1.5rem 1.8rem',      // reduced padding
+      }}
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        fontWeight={400}
+        sx={{ letterSpacing: '0.05em', color: isDark ? '#eee' : '#222', mb: 1.5 }}  // smaller bottom margin
+      >
+         Contact Information:
       </Typography>
-      <ContactItem>
-        <Link href="mailto:wren@hris.com">
-          <FaEnvelope style={{ marginRight: '8px' }} />
-          macayanwren@gmail.com
-        </Link>
-      </ContactItem>
-      <ContactItem>
-        <Link href="tel:+1234567890">
-          <FaPhoneAlt style={{ marginRight: '8px' }} />
-          +63 906 006 3929
-        </Link>
-      </ContactItem>
-      <ContactItem>
-        <Link href="https://www.linkedin.com/in/wrenmcyn/" target="_blank" rel="noopener noreferrer">
-          <FaLinkedin style={{ marginRight: '8px' }} />
-          LinkedIn
-        </Link>
-      </ContactItem>
-      <ContactItem>
-        <Link href="https://github.com/hnddrx" target="_blank" rel="noopener noreferrer">
-          <FaGithub style={{ marginRight: '8px' }} />
-          GitHub
-        </Link>
-      </ContactItem>
+
+      {[{
+        href: 'mailto:macayanwren@gmail.com',
+        icon: <FaEnvelope style={{ marginRight: 8, fontSize: 18, color: '#0073e6' }} />,
+        text: 'macayanwren@gmail.com'
+      }, {
+        href: 'tel:+639060063929',
+        icon: <FaPhoneAlt style={{ marginRight: 8, fontSize: 18, color: '#0073e6' }} />,
+        text: '+63 906 006 3929'
+      }, {
+        href: 'https://www.linkedin.com/in/wrenmcyn/',
+        icon: <FaLinkedin style={{ marginRight: 8, fontSize: 18, color: '#0073e6' }} />,
+        text: 'LinkedIn'
+      }, {
+        href: 'https://github.com/hnddrx',
+        icon: <FaGithub style={{ marginRight: 8, fontSize: 18, color: '#0073e6' }} />,
+        text: 'GitHub'
+      }].map(({ href, icon, text }) => (
+        <ContactItem
+          key={text}
+          sx={{ 
+            fontWeight: 300,
+            marginBottom: '0.8rem',     // tighter vertical spacing
+            fontSize: '0.95rem',
+          }}
+        >
+          <Link
+            href={href}
+            target={href.startsWith('http') ? '_blank' : undefined}
+            rel="noopener noreferrer"
+            underline="hover"
+            sx={{
+              color: isDark ? '#bbb' : '#0073e6',
+              display: 'flex',
+              alignItems: 'center',
+              transition: 'color 0.3s ease',
+              '&:hover': { color: isDark ? '#fff' : '#005bb5' },
+              fontSize: 'inherit',
+            }}
+          >
+            {icon}
+            {text}
+          </Link>
+        </ContactItem>
+      ))}
     </CardBox>
   );
 }
 
+
 // Contact Form Component
 function ContactForm({ formData, handleChange, handleSubmit, isDark }) {
   return (
-    <CardBox sx={{ backgroundColor: isDark ? '#1e1e1e' : '#ffffff' }}>
-      <Typography variant="h6" gutterBottom fontWeight={600}>
+    <CardBox
+      sx={{
+        backgroundColor: isDark ? '#121212' : '#fafafa',
+        color: isDark ? '#bbb' : '#444',
+        
+      }}
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        fontWeight={400}
+        sx={{ letterSpacing: '0.05em', color: isDark ? '#eee' : '#222', mb: 3 }}
+      >
         Get In Touch:
       </Typography>
-      <form onSubmit={handleSubmit}>
+
+      <form onSubmit={handleSubmit} noValidate>
         <Input
           label="Name"
           type="text"
@@ -180,7 +225,25 @@ function ContactForm({ formData, handleChange, handleSubmit, isDark }) {
           fullWidth
           required
           variant="outlined"
+          sx={{
+            '& label': { color: isDark ? '#aaa' : '#666' },
+            '& .MuiOutlinedInput-root': {
+              color: isDark ? '#ddd' : '#333',
+              '& fieldset': {
+                borderColor: isDark ? '#444' : '#ccc',
+                borderRadius: 3,
+              },
+              '&:hover fieldset': {
+                borderColor: '#0073e6',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#0073e6',
+                borderWidth: 2,
+              },
+            },
+          }}
         />
+
         <Input
           label="Email"
           type="email"
@@ -190,7 +253,25 @@ function ContactForm({ formData, handleChange, handleSubmit, isDark }) {
           fullWidth
           required
           variant="outlined"
+          sx={{
+            '& label': { color: isDark ? '#aaa' : '#666' },
+            '& .MuiOutlinedInput-root': {
+              color: isDark ? '#ddd' : '#333',
+              '& fieldset': {
+                borderColor: isDark ? '#444' : '#ccc',
+                borderRadius: 3,
+              },
+              '&:hover fieldset': {
+                borderColor: '#0073e6',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#0073e6',
+                borderWidth: 2,
+              },
+            },
+          }}
         />
+
         <Input
           label="Message"
           multiline
@@ -201,8 +282,40 @@ function ContactForm({ formData, handleChange, handleSubmit, isDark }) {
           fullWidth
           required
           variant="outlined"
+          sx={{
+            '& label': { color: isDark ? '#aaa' : '#666' },
+            '& .MuiOutlinedInput-root': {
+              color: isDark ? '#ddd' : '#333',
+              '& fieldset': {
+                borderColor: isDark ? '#444' : '#ccc',
+                borderRadius: 3,
+              },
+              '&:hover fieldset': {
+                borderColor: '#0073e6',
+              },
+              '&.Mui-focused fieldset': {
+                borderColor: '#0073e6',
+                borderWidth: 2,
+              },
+            },
+          }}
         />
-        <SubmitButton type="submit">Send Message</SubmitButton>
+
+        <SubmitButton
+          type="submit"
+          variant="contained"
+          sx={{
+            bgcolor: '#0073e6',
+            '&:hover': { bgcolor: '#005bb5' },
+            fontWeight: 600,
+            fontSize: '1rem',
+            borderRadius: 3,
+            py: 1.5,
+            mt: 2,
+          }}
+        >
+          Send Message
+        </SubmitButton>
       </form>
     </CardBox>
   );
@@ -284,24 +397,25 @@ export default function Home() {
       </motion.section>
 
       {/* ABOUT */}
-      <section id="about" className={styles.section} data-aos="fade-up">
+      <section id="about" className={styles.section} data-aos="fade">
         <h2 className={styles.sectionHeading}>About Me</h2>
+
         <div className={styles.glassCard}>
-          <p className={`${isDark ? styles.text : styles.textlight}`}>
-            Hello, I&apos;m Wren – a seasoned full-stack developer with expertise in PostgreSQL, Python,
-            XML, Odoo, MongoDB, ReactJS, ExpressJS, and NodeJS. Let’s collaborate and turn your innovative
-            ideas into cutting-edge solutions!
+          <p className={isDark ? styles.text : styles.textlight}>
+            Hi, I’m <strong>Wren</strong> — a full-stack developer fluent in turning caffeine into code. From elegant front-ends with <strong>React</strong> to robust back-ends with <strong>Node</strong>, <strong>Python</strong>, and <strong>PostgreSQL</strong>, I build solutions that are as scalable as they are sleek. <br /><br />
+            Need an Odoo wizard or a Mongo whisperer? I speak both. Let’s make something brilliant — and ship it.
           </p>
         </div>
       </section>
 
+
       {/* SKILLS */}
-      <section id="skills" className={styles.section} data-aos="fade-up">
+      <section id="skills" className={styles.section} data-aos="fade">
         <h2 className={styles.sectionHeading}>Skills</h2>
         <div className={styles.skillGrid}>
           {skills.map((skill, i) => (
             <Tooltip key={i} title={skill.title} arrow>
-              <div className={styles.skillCard}>
+              <div className={styles.skillCard} data-aos="fade-up">
                 <span className={`${styles.skillIcon} ${isDark ? styles.iconDark : ''}`}>{skill.icon}</span>
               </div>
             </Tooltip>
@@ -310,100 +424,126 @@ export default function Home() {
       </section>
 
       {/* PROJECTS */}
-      <section id="projects" className={styles.section} data-aos="fade-up">
-        <h2 className={styles.sectionHeading}>Projects</h2>
+      <section id="projects" className={styles.section} data-aos="fade">
+        <h2 className={styles.sectionHeading}>Past Project Experience</h2>
+        <h3 className={styles.sectionSubHeading}>Explore the projects I&apos;ve worked on so far</h3>
+
         <div className={styles.projectGrid}>
           {projects.map((project, i) => (
-            <div key={i} className={styles.projectCard}>
-              <h3>
+            <div
+              key={i}
+              className={styles.projectCard}
+              data-aos="fade-up"
+              data-aos-delay={i * 100} // stagger animation
+              data-aos-duration="800"
+            >
+              <h3 className={styles.projectTitle}>
                 {project.icon} {project.title}
               </h3>
-              <p className={`${isDark ? styles.text : styles.textlight}`}>{project.description}</p>
+
+              <p className={`${isDark ? styles.text : styles.textlight}`}>
+                {project.description}
+              </p>
 
               <Box
                 sx={{
                   display: 'flex',
                   flexDirection: { xs: 'column', sm: 'row' },
-                  gap: 1.5,
-                  marginTop: 2,
-                  alignItems: { xs: 'stretch', sm: 'center' },
+                  alignItems: 'flex-start',
+                  gap: 2,
+                  mt: 2,
                   flexWrap: 'wrap',
                 }}
               >
-                {project.url && (
-                  <Tooltip title="View Live">
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      href={project.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{ flexShrink: 0, minWidth: '36px', padding: '6px' }}
-                    >
-                      <LaunchIcon fontSize="small" />
-                    </Button>
-                  </Tooltip>
-                )}
+                <Box sx={{ display: 'flex', gap: 1 }}>
+                  {project.url && (
+                    <Tooltip title="View Live" arrow>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        href={project.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          minWidth: 36,
+                          p: '6px',
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                          },
+                        }}
+                      >
+                        <LaunchIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
+                  )}
 
-                {project.repo && (
-                  <Tooltip title="GitHub Repo">
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      href={project.repo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      sx={{ flexShrink: 0, minWidth: '36px', padding: '6px' }}
-                    >
-                      <GitHubIcon fontSize="small" />
-                    </Button>
-                  </Tooltip>
-                )}
+                  {project.repo && (
+                    <Tooltip title="GitHub Repo" arrow>
+                      <Button
+                        variant="outlined"
+                        color="primary"
+                        href={project.repo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{
+                          minWidth: 36,
+                          p: '6px',
+                          boxShadow: '0 2px 6px rgba(0,0,0,0.05)',
+                          transition: 'all 0.3s ease',
+                          '&:hover': {
+                            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                          },
+                        }}
+                      >
+                        <GitHubIcon fontSize="small" />
+                      </Button>
+                    </Tooltip>
+                  )}
+                </Box>
 
-              <Box
-                sx={{
-                  display: 'flex',
-                  flexWrap: 'wrap',
-                  gap: 1,
-                  mt: { xs: 1, sm: 0 },
-                }}
-              >
-                {project.tools?.map((tool, index) => (
-                  <Tooltip key={index} title={tool} arrow>
-                    <Box
-                      component="span"
-                      sx={{
-                        px: 1.5,
-                        py: 0.5,
-                        borderRadius: '20px',
-                        backgroundColor: isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.04)',
-                        fontSize: '0.75rem',
-                        fontWeight: 500,
-                        color: isDark ? '#e0e0e0' : '#333',
-                        lineHeight: 1.5,
-                        letterSpacing: 0.3,
-                        cursor: 'pointer',  // Use pointer to check hover area
-                        display: 'inline-block',  // Important for tooltip child
-                      }}
-                    >
-                      {tool}
-                    </Box>
-                  </Tooltip>
-                ))}
-              </Box>
-
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: 1,
+                  }}
+                >
+                  {project.tools?.map((tool, index) => (
+                    <Tooltip key={index} title={tool} arrow>
+                      <Box
+                        component="span"
+                        sx={{
+                          px: 1.5,
+                          py: 0.5,
+                          borderRadius: '16px',
+                          backgroundColor: isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.03)',
+                          fontSize: '0.75rem',
+                          fontWeight: 500,
+                          color: isDark ? '#ddd' : '#444',
+                          transition: 'background 0.3s ease',
+                          cursor: 'default',
+                        }}
+                      >
+                        {tool}
+                      </Box>
+                    </Tooltip>
+                  ))}
+                </Box>
               </Box>
             </div>
           ))}
         </div>
       </section>
 
+
       {/* CONTACT */}
-      <Section id="contact" data-aos="fade-up" sx={{ backgroundColor: isDark ? '#0a0a0a' : '#ffffff' }}>
-        <SectionHeading variant="h4" className={styles.sectionHeading}>
+      <Section id="contact" data-aos="fade" sx={{ backgroundColor: isDark ? '#0a0a0a' : '#ffffff' }}>
+        <SectionHeading variant="h4" >
           Contact
         </SectionHeading>
-        <ContactContainer>
+        <ContactContainer data-aos="fade-up">
           <ContactInfo isDark={isDark} />
           <ContactForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} isDark={isDark} />
         </ContactContainer>

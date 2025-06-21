@@ -59,15 +59,16 @@ export default function Navbar() {
         top: isSmallScreen ? 8 : 16,
         left: '50%',
         transform: 'translateX(-50%)',
-        maxWidth: isSmallScreen ? '100%' : '480px',
+        display: 'flex',
+        maxWidth: isSmallScreen ? '100%' : '380px',
         width: 'calc(100% - 1.5rem)',
         height: isSmallScreen ? '48px' : '64px',
-        borderRadius: isSmallScreen ? 0 : '10px',
-        backdropFilter: 'blur(10px)',
+        borderRadius: isSmallScreen ? '50px' : '50px',
+        backdropFilter: 'blur(5px)',
         backgroundColor: isDark
-          ? 'rgba(20, 20, 20, 0.6)'
+          ? 'rgba(107, 103, 103, 0.6)'
           : 'rgba(255, 255, 255, 0.6)',
-        border: isDark ? '1px solid #333' : '1px solid #ccc',
+        border: isDark ? '1px solid #333' : '',
         zIndex: 1300,
       }}
     >

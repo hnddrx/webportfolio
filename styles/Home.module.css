@@ -88,38 +88,60 @@
 /* ----------------------------------- */
 
 .section {
-  padding: 4rem 2rem;
-  max-width: 900px;
+  padding: 4rem 1.5rem;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .sectionHeading {
-  font-size: 2.5rem;
-  font-weight: 600;
-  margin-bottom: 2rem;
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
   text-align: center;
-  text-transform: uppercase;
-  color: #333;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
 }
+
+.sectionSubHeading {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  text-align: center;
+  letter-spacing: 0;
+  color: var(--text-secondary, #666);
+  margin-top: 0;
+  margin-bottom: 2.5rem;
+  line-height: 1.5;
+}
+
 
 /* Text Helpers */
 .text {
-  font-size: 1.1rem;
-  color: #ccc;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #ddd;
 }
 
 .textlight {
-  font-size: 1.1rem;
-  color: #555;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #444;
 }
+
 
 /* Glass Card */
 .glassCard {
+  margin-top: var(--space-xxl, 3rem);
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
   padding: 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.glassCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* ----------------------------------- */
@@ -168,70 +190,50 @@
 
 .projectGrid {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .projectCard {
-  background: #fff;
+  background: var(--card-bg, #fff);
   border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .projectCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.projectTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.text {
+  color: #d1d1d1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.textlight {
+  color: #444;
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
 .dark .projectCard {
   background: #1a1a1a;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
 .light .projectCard {
   background: #ffffff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-.cardFooter {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.actionButtons {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.iconButton {
-  min-width: 36px;
-  padding: 6px;
-}
-
-.toolsWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.projectTool {
-  background-color: #e0e0e0;
-  color: #333;
-  font-size: 0.8rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 5px;
-  display: inline-block;
-  white-space: nowrap;
 }
 
 /* ----------------------------------- */
@@ -363,4 +365,52 @@
 
 .footerDark .socialIcons a:hover {
   color: #f39c12;
+}
+
+
+:root {
+  /* Typography */
+  --text-primary: #222222;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+
+  /* Backgrounds */
+  --background: #ffffff;
+  --card-bg: #f9f9f9;
+
+  /* Accent Colors */
+  --accent-color: #00feba;
+  --accent-color-alt: #5b86e5;
+
+  /* Border & Effects */
+  --border-radius: 12px;
+  --box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+
+  /* margin */
+  --space-xxs: 0.25rem;  /* 4px */
+  --space-xs:  0.5rem;   /* 8px */
+  --space-sm:  1rem;     /* 16px */
+  --space-md:  1.5rem;   /* 24px */
+  --space-lg:  2rem;     /* 32px */
+  --space-xl:  3rem;     /* 48px */
+  --space-xxl: 4rem;    /* 64px */
+  --space-xxxl: 6rem;   /* 96px */  
+}
+
+body.dark {
+  /* Typography */
+  --text-primary: #f1f1f1;
+  --text-secondary: #aaaaaa;
+  --text-muted: #777777;
+
+  /* Backgrounds */
+  --background: #0a0a0a;
+  --card-bg: rgba(255, 255, 255, 0.05);
+
+  /* Accent Colors */
+  --accent-color: #5b86e5;
+  --accent-color-alt: #00feba;
+
+  /* Optional tweaks */
+  --box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
 }
