@@ -9,7 +9,9 @@ import 'aos/dist/aos.css';
 import { useTheme } from '../context/ThemeContext';
 import projects from '../data/projects';
 import skills from '../data/skills';
+import experiences from '../data/experiences';
 
+import WorkExperience from '@/components/WorkExperience/WorkExperiance';
 import styles from '../styles/Home.module.css';
 import '../styles/global.css';
 
@@ -410,6 +412,12 @@ export default function Home() {
         </div>
       </section>
 
+       <Section id="contact" data-aos="fade" sx={{ backgroundColor: isDark ? '#0a0a0a' : '#ffffff' }}>
+        <SectionHeading variant="h4" >
+          Work Experience
+        </SectionHeading>
+        <WorkExperience experiences={experiences} isDark={isDark} />
+      </Section>
 
       {/* SKILLS */}
       <section id="skills" className={styles.section} data-aos="fade">
@@ -541,15 +549,39 @@ export default function Home() {
 
 
       {/* CONTACT */}
-      <Section id="contact" data-aos="fade" sx={{ backgroundColor: isDark ? '#0a0a0a' : '#ffffff' }}>
-        <SectionHeading variant="h4" >
-          Contact
-        </SectionHeading>
-        <ContactContainer data-aos="fade-up">
-          <ContactInfo isDark={isDark} />
-          <ContactForm formData={formData} handleChange={handleChange} handleSubmit={handleSubmit} isDark={isDark} />
-        </ContactContainer>
-      </Section>
+      <Section
+      id="contact"
+      data-aos="fade"
+      sx={{
+        backgroundColor: isDark ? '#0a0a0a' : '#ffffff',
+        py: 8, // optional: adds vertical padding
+        px: 2, // optional: adds horizontal padding
+      }}
+    >
+      <SectionHeading variant="h4" sx={{ textAlign: 'center', mb: 4 }}>
+        Contact
+      </SectionHeading>
+
+      <ContactContainer
+        data-aos="fade-up"
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', md: 'row' },
+          gap: 4,
+          justifyContent: 'center',
+          alignItems: 'flex-start',
+        }}
+      >
+        <ContactInfo isDark={isDark} />
+        <ContactForm
+          formData={formData}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          isDark={isDark}
+        />
+      </ContactContainer>
+    </Section>
+
 
       {/* Snackbar Alert */}
       <Snackbar
