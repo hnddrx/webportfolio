@@ -57,13 +57,13 @@ const Section = styled('section')(({ theme }) => ({
 }));
 
 const SectionHeading = styled(Typography)({
-  fontWeight: 700,
-  fontSize: '2.5rem',
-  textAlign: 'center',
-  marginBottom: '2rem',
-  color: '#333',
-  textTransform: 'uppercase',
-  letterSpacing: '1px',
+  fontSize: 'clamp(1.75rem, 5vw, 2.5rem)',
+        textAlign: 'center',
+        fontWeight: 700,
+        letterSpacing: '-0.5px',
+        color: 'var(--text-primary)',
+        marginBottom: '3.5rem',
+        lineHeight: 1.2,
 });
 
 const ContactContainer = styled(Box)({
@@ -138,10 +138,12 @@ function ContactInfo({ isDark }) {
         padding: '1.5rem 1.8rem',      // reduced padding
       }}
     >
+
+      
       <Typography
         variant="h6"
         gutterBottom
-        fontWeight={400}
+        fontWeight={700}
         sx={{ letterSpacing: '0.05em', color: isDark ? '#eee' : '#222', mb: 1.5 }}  // smaller bottom margin
       >
          Contact Information:
