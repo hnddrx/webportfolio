@@ -1,19 +1,18 @@
 'use client';
 
-import React, { useRef, useState, useEffect } from 'react';
+import React from 'react';
 import { Box, Typography, useTheme, useMediaQuery, Paper } from '@mui/material';
-import { motion, useScroll, useTransform, useAnimation, useInView, useMotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 
 const itemVariants = {
-  hidden: { opacity: 0, y: 60, scale: 0.98 },
+  hidden: { opacity: 0, y: 60, scale: 0.95 },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
     transition: {
-      type: 'spring',
-      stiffness: 80,
-      damping: 20,
+      duration: 0.6,
+      ease: 'easeOut',
     },
   },
 };
@@ -21,7 +20,7 @@ const itemVariants = {
 export default function WorkExperience({ experiences, isDark }) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const containerRef = useRef(null);
+  const containerRef = React.useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -31,33 +30,18 @@ export default function WorkExperience({ experiences, isDark }) {
   const maxProgress = useMotionValue(0);
   const lineHeight = useTransform(maxProgress, [0, 1], ['0%', '100%']);
 
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (latest) => {
-      if (latest > maxProgress.get()) {
-        maxProgress.set(latest);
-      }
-    });
-    return () => unsubscribe();
-  }, [scrollYProgress, maxProgress]);
-
-  const [scrollDir, setScrollDir] = useState('down');
-  useEffect(() => {
-    let lastY = window.scrollY;
-    const updateDir = () => {
-      const y = window.scrollY;
-      setScrollDir(y > lastY ? 'down' : 'up');
-      lastY = y;
-    };
-    window.addEventListener('scroll', updateDir);
-    return () => window.removeEventListener('scroll', updateDir);
-  }, []);
+  scrollYProgress.on('change', (latest) => {
+    if (latest > maxProgress.get()) {
+      maxProgress.set(latest);
+    }
+  });
 
   return (
     <Box
       ref={containerRef}
       sx={{
         position: 'relative',
-        py: { xs: 8, md: 12 },
+        py: { xs: 4, md: 10 },
         px: { xs: 2, sm: 4 },
         maxWidth: 1000,
         mx: 'auto',
@@ -65,7 +49,9 @@ export default function WorkExperience({ experiences, isDark }) {
         color: isDark ? '#f0f0f0' : '#111',
       }}
     >
-      {/* Timeline base line */}
+      {/* Base timeline line */}
+  
+
       <Box
         sx={{
           position: 'absolute',
@@ -79,14 +65,14 @@ export default function WorkExperience({ experiences, isDark }) {
         }}
       />
 
-      {/* Animated scroll-following line */}
+      {/* Animated progress line */}
       <motion.div
         style={{
           height: lineHeight,
           position: 'absolute',
           left: '50%',
           top: 0,
-          width: '2px',
+          width: '1px',
           backgroundColor: theme.palette.primary.main,
           transform: 'translateX(-50%)',
           borderRadius: 6,
@@ -94,42 +80,32 @@ export default function WorkExperience({ experiences, isDark }) {
         }}
       />
 
-      {/* Experience timeline items */}
       {experiences.map((exp, idx) => {
         const isLeft = !isMobile && idx % 2 === 0;
-
-        const ref = useRef(null);
-        const inView = useInView(ref, { once: true, margin: '-20% 0px -20% 0px' });
-        const controls = useAnimation();
-
-        useEffect(() => {
-          if (inView && scrollDir === 'down') {
-            controls.start('visible');
-          }
-        }, [inView, scrollDir]);
 
         return (
           <motion.div
             key={idx}
-            ref={ref}
-            variants={itemVariants}
             initial="hidden"
-            animate={controls}
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.3 }}
+            variants={itemVariants}
             style={{
               display: 'flex',
-              justifyContent: isLeft ? 'flex-end' : 'flex-start',
+              justifyContent: isMobile ? 'center' : isLeft ? 'flex-end' : 'flex-start',
               position: 'relative',
-              marginBottom: '4rem',
+              marginBottom: '2rem',
               width: '100%',
               zIndex: 2,
             }}
           >
-            {/* Dot */}
+            {/* Dot (adjusted for mobile) */}
             <Box
               sx={{
                 position: 'absolute',
-                top: 20,
-                left: 'calc(50% - 8px)',
+                top: isMobile ? 0 : 20,
+                left: isMobile ? 'calc(50% - 10px)' : 'calc(50% - 10px)',
+                transform: isMobile ? 'translateY(-50%)' : 'none',
                 width: 16,
                 height: 16,
                 backgroundColor: theme.palette.primary.main,
@@ -139,26 +115,34 @@ export default function WorkExperience({ experiences, isDark }) {
               }}
             />
 
-            {/* Card-like experience box */}
+            {/* Card */}
             <Paper
               elevation={3}
               sx={{
-                width: { xs: '100%', sm: '80%', md: '45%' },
-                p: 3,
+                width: { xs: '100%', sm: '85%', md: '45%' },
+                mt: isMobile ? 3 : 6, // shift card down on mobile to avoid overlap
+                p: { xs: 2, sm: 3 },
                 borderRadius: 3,
                 backgroundColor: isDark ? 'rgba(30,30,30,0.6)' : '#fff',
                 backdropFilter: isDark ? 'blur(4px)' : 'none',
-                ml: isLeft ? 0 : 4,
-                mr: isLeft ? 4 : 0,
-                textAlign: isLeft ? 'right' : 'left',
+                mx: isMobile ? 'auto' : isLeft ? 0 : 4,
+                ml: isMobile ? 'auto' : isLeft ? 0 : 4,
+                mr: isMobile ? 'auto' : isLeft ? 4 : 0,
+                textAlign: isMobile ? 'center' : isLeft ? 'right' : 'left',
                 color: isDark ? '#ddd' : '#222',
                 transition: 'all 0.3s ease-in-out',
               }}
             >
               <Typography variant="subtitle1" fontWeight={600} sx={{ mb: 0.5 }}>
-                {exp.role} <Typography component="span" fontWeight={400}>@ {exp.company}</Typography>
+                {exp.role}{' '}
+                <Typography component="span" fontWeight={400}>
+                  @ {exp.company}
+                </Typography>
               </Typography>
-              <Typography variant="body2"  sx={{ mb: 1, fontSize: '0.875rem', color: isDark ? '#bbb' : '#555' }}>
+              <Typography
+                variant="body2"
+                sx={{ mb: 1, fontSize: '0.875rem', color: isDark ? '#bbb' : '#555' }}
+              >
                 {exp.duration}
               </Typography>
               <Typography variant="body1" sx={{ lineHeight: 1.6 }}>

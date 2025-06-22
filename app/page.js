@@ -412,12 +412,13 @@ export default function Home() {
         </div>
       </section>
 
-       <Section id="contact" data-aos="fade" sx={{ backgroundColor: isDark ? '#0a0a0a' : '#ffffff' }}>
-        <SectionHeading variant="h4" >
+      <Section id="contact" data-aos="fade" sx={{ backgroundColor: isDark ? '#0a0a0a' : '#ffffff' }}>
+        <SectionHeading variant="h4">
           Work Experience
         </SectionHeading>
         <WorkExperience experiences={experiences} isDark={isDark} />
       </Section>
+
 
       {/* SKILLS */}
       <section id="skills" className={styles.section} data-aos="fade">
