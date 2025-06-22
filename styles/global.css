@@ -8,5 +8,54 @@ body.light {
     color: black;
   }
   
+
+  
+:root {
+  /* Typography */
+  --text-primary: #222222;
+  --text-secondary: #555555;
+  --text-muted: #888888;
+
+  /* Backgrounds */
+  --background: #ffffff;
+  --card-bg: #f9f9f9;
+
+  /* Accent Colors */
+  --accent-color: #00feba;
+  --accent-color-alt: #5b86e5;
+
+  /* Border & Effects */
+  --border-radius: 12px;
+  --box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+
+  /* margin */
+  --space-xxs: 0.25rem;  /* 4px */
+  --space-xs:  0.5rem;   /* 8px */
+  --space-sm:  1rem;     /* 16px */
+  --space-md:  1.5rem;   /* 24px */
+  --space-lg:  2rem;     /* 32px */
+  --space-xl:  3rem;     /* 48px */
+  --space-xxl: 4rem;    /* 64px */
+  --space-xxxl: 6rem;   /* 96px */  
+}
+
+body.dark {
+  /* Typography */
+  --text-primary: #f1f1f1;
+  --text-secondary: #aaaaaa;
+  --text-muted: #777777;
+
+  /* Backgrounds */
+  --background: #0a0a0a;
+  --card-bg: rgba(255, 255, 255, 0.05);
+
+  /* Accent Colors */
+  --accent-color: #5b86e5;
+  --accent-color-alt: #00feba;
+
+  /* Optional tweaks */
+  --box-shadow: 0 6px 24px rgba(0, 0, 0, 0.2);
+}
+
   /* Additional global styles */
   
