@@ -1,33 +1,3 @@
-/* === GLOBAL THEMING === */
-
-:root {
-  /* Typography */
-  --text-primary: #222222;
-  --text-secondary: #555555;
-  --text-muted: #888888;
-
-  /* Backgrounds */
-  --background: #ffffff;
-  --card-bg: #f9f9f9;
-
-  /* Accent Colors */
-  --accent-color: #00feba;
-  --accent-color-alt: #5b86e5;
-
-  /* Borders & Effects */
-  --border-radius: 12px;
-  --box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
-
-  /* Spacing */
-  --space-xxs: 0.25rem;
-  --space-xs: 0.5rem;
-  --space-sm: 1rem;
-  --space-md: 1.5rem;
-  --space-lg: 2rem;
-  --space-xl: 3rem;
-  --space-xxl: 4rem;
-  --space-xxxl: 6rem;
-}
 
 /* === DARK MODE OVERRIDES === */
 body.dark {
