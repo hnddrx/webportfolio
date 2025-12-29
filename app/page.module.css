@@ -108,6 +108,68 @@ a.secondary {
   flex-shrink: 0;
 }
 
+/* Responsive preview container */
+.previewWrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  overflow: hidden;
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.01)
+  );
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
+  margin-bottom: 1rem;
+}
+
+/* Inner scaling layer */
+.previewInner {
+  width: 100%;
+  height: 100%;
+  transform: scale(0.92);
+  transform-origin: top left;
+}
+
+/* Non-interactive iframe */
+.previewIframe {
+  width: 110%;
+  height: 110%;
+  border: none;
+  pointer-events: none;
+  filter: saturate(0.95) contrast(1.05);
+}
+
+/* ✨ Witty fallback */
+.previewFallback {
+  aspect-ratio: 16 / 9;
+  border-radius: 14px;
+  background: radial-gradient(
+    circle at top left,
+    rgba(255,255,255,0.06),
+    rgba(0,0,0,0.2)
+  );
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.previewFallback span {
+  font-size: 2rem;
+  margin-bottom: 0.25rem;
+}
+
+.previewFallback p {
+  margin: 0;
+  line-height: 1.3;
+}
+
+
 /* Enable hover only on non-touch devices */
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {

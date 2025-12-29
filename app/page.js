@@ -437,7 +437,9 @@ export default function Home() {
       {/* PROJECTS */}
       <section id="projects" className={styles.section} data-aos="fade">
         <h2 className={styles.sectionHeading}>Past Project Experience</h2>
-        <h3 className={styles.sectionSubHeading}>Explore the projects I&apos;ve worked on so far</h3>
+        <h3 className={styles.sectionSubHeading}>
+          Explore the projects I&apos;ve worked on so far
+        </h3>
 
         <div className={styles.projectGrid}>
           {projects.map((project, i) => (
@@ -445,14 +447,34 @@ export default function Home() {
               key={i}
               className={styles.projectCard}
               data-aos="fade-up"
-              data-aos-delay={i * 100} // stagger animation
+              data-aos-delay={i * 100}
               data-aos-duration="800"
             >
-              <h3 className={styles.projectTitle}>
-                {project.icon} {project.title}
-              </h3>
+              {/* PREVIEW */}
+                {project.url ? (
+                  <div className={styles.previewWrapper}>
+                    <div className={styles.previewInner}>
+                      <iframe
+                        src={project.url}
+                        title={project.title}
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                        className={styles.previewIframe}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  <div className={styles.previewFallback}>
+                    <span>🚧</span>
+                    <p>Demo is shy.<br />Ask it nicely.</p>
+                  </div>
+                )}
+                
+              {/* TITLE */}
+              <h3 className={styles.projectTitle}>{project.title}</h3>
 
-              <p className={`${isDark ? styles.text : styles.textlight}`}>
+              {/* DESCRIPTION */}
+              <p className={isDark ? styles.text : styles.textlight}>
                 {project.description}
               </p>
 
@@ -466,6 +488,7 @@ export default function Home() {
                   flexWrap: 'wrap',
                 }}
               >
+                {/* ACTION BUTTONS */}
                 <Box sx={{ display: 'flex', gap: 1 }}>
                   {project.url && (
                     <Tooltip title="View Live" arrow>
@@ -514,13 +537,8 @@ export default function Home() {
                   )}
                 </Box>
 
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: 1,
-                  }}
-                >
+                {/* TOOLS */}
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                   {project.tools?.map((tool, index) => (
                     <Tooltip key={index} title={tool} arrow>
                       <Box
@@ -529,12 +547,13 @@ export default function Home() {
                           px: 1.5,
                           py: 0.5,
                           borderRadius: '16px',
-                          backgroundColor: isDark ? 'rgba(255, 255, 255, 0.06)' : 'rgba(0, 0, 0, 0.03)',
+                          backgroundColor: isDark
+                            ? 'rgba(255,255,255,0.06)'
+                            : 'rgba(0,0,0,0.03)',
                           fontSize: '0.75rem',
                           fontWeight: 500,
                           color: isDark ? '#ddd' : '#444',
                           transition: 'background 0.3s ease',
-                          cursor: 'default',
                         }}
                       >
                         {tool}
@@ -547,6 +566,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+
 
 
       {/* CONTACT */}
